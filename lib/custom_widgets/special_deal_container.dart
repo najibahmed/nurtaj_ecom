@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:nurtaj_ecom_home/Pages/product_details_page.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/cardItemHorixontal.dart';
@@ -10,7 +11,7 @@ class SpecialDealContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 12),
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
@@ -33,21 +34,21 @@ class SpecialDealContainer extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 8),
                     child: SizedBox(
-                      width: 200,
+                      width: 180,
                       height: 30,
                       child: const Text(
                         "Today Special Deal",
                         style: TextStyle(
                           color: Colors.white,
+                          fontWeight: FontWeight.w800,
                           fontSize: 22,
                           // fontWeight: FontWeight.bold
                         ),
                       ),
                     ),
                   ),
-                  Container(
-                    child:const CountDownTimer()
-                  ),
+                  /// Timer Countdown Widget
+                  const CountDownTimer(),
                 ],
               ),
             ),

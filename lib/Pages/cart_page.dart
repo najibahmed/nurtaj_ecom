@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/card_item_view.dart';
-import 'package:nurtaj_ecom_home/models/product_model.dart';
+import 'package:nurtaj_ecom_home/models/cart_model.dart';
 
 class CartPage extends StatefulWidget {
   static const String routeName= '/cartPage';
@@ -11,6 +11,7 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  late CartModel cartModel;
   @override
   Widget build(BuildContext context) {
     return  Scaffold(
@@ -23,8 +24,8 @@ class _CartPageState extends State<CartPage> {
               child: ListView.builder(
                 itemCount: 1,
                 itemBuilder: (context, index) {
-                  // final cartModel = provider.cartList[index];
-                  return CartItemView();
+                  final cartModel = cartList[index];
+                  return CartItemView( cartModel: cartModel,);
                 },
               ),
             ),

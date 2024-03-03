@@ -43,3 +43,11 @@ class CartModel {
     salePrice: map[cartFieldSalePrice],
   );
 }
+  List<CartModel>cartList=[
+  CartModel(
+      productId: '180119',
+      categoryId: '180118',
+      productName: 'Men suite',
+      productImageUrl: 'men_suite.png',
+      salePrice: 20)
+];

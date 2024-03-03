@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:nurtaj_ecom_home/Pages/cart_page.dart';
 import 'package:nurtaj_ecom_home/Pages/home_page.dart';
 import 'package:nurtaj_ecom_home/Pages/product_details_page.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
