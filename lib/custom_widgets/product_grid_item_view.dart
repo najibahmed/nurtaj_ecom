@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
 
-import '../pages/product_details_page.dart';
+import '../Views/detail/product_details_page.dart';
 
 class ProductGridItemView extends StatelessWidget {
   ProductModel productModel;

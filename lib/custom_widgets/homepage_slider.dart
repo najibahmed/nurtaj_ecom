@@ -1,7 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:nurtaj_ecom_home/Pages/cart_page.dart';
-import 'package:nurtaj_ecom_home/Pages/product_details_page.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
 
 class SliderBanner extends StatelessWidget {
@@ -47,9 +45,9 @@ class SliderBanner extends StatelessWidget {
             scrollPhysics: const BouncingScrollPhysics(),
             reverse: false,
             autoPlay: true,
-            autoPlayInterval: Duration(seconds: 3),
+            autoPlayInterval: const Duration(seconds: 3),
             autoPlayAnimationDuration:
-            Duration(milliseconds: 800)),
+            const Duration(milliseconds: 800)),
       ),
     );
   }

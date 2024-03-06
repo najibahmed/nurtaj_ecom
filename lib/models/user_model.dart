@@ -59,3 +59,8 @@ class UserModel {
     imageUrl: map[userFieldImageUrl],
   );
 }
+List<UserModel> userList=[
+  UserModel(
+      userId: "NT188",
+      email: 'najib@gmail.com')
+];

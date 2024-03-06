@@ -2,6 +2,7 @@ import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:nurtaj_ecom_home/custom_widgets/tab_bar_grid_item.dart';
 
 class CustomTabView extends StatefulWidget {
   const CustomTabView({super.key});
@@ -83,25 +84,8 @@ class _CustomTabViewState extends State<CustomTabView> {
                   ),
                   child: TabBarView(
                     children: <Widget>[
-                      GridView.builder(
-                            scrollDirection: Axis.horizontal,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              childAspectRatio: 1,
-                          ),
-                          itemCount: 12,
-                          itemBuilder: (context, index) => InkWell(
-                            child: Card(
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                child: FlutterLogo(),
-                              ),
-                            ),
-                          )),
-                      Center(
-                        child: Icon(Icons.directions_bike),
-                      ),
+                      tabBarGridItems(),
+                      tabBarGridItems(),
                       Center(
                         child: Icon(Icons.directions_car),
                       ),
@@ -112,8 +96,10 @@ class _CustomTabViewState extends State<CustomTabView> {
                   ),
                 ),
               ),
-            )
+            ),
           ],),
         ));
   }
+
+
 }

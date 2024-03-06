@@ -41,8 +41,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
             child: Row(
               children: [
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 45,
+                  width: 45,
                   color: Colors.black.withOpacity(.75),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -60,8 +60,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
                 ),
                 SizedBox(width: 5,),
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 45,
+                  width: 45,
                   color: Colors.black.withOpacity(.75),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -79,8 +79,8 @@ class _CountDownTimerState extends State<CountDownTimer> {
                 ),
                 SizedBox(width: 5,),
                 Container(
-                  height: 50,
-                  width: 50,
+                  height: 45,
+                  width: 45,
                   color: Colors.black.withOpacity(.75),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,

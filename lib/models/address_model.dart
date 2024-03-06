@@ -27,3 +27,10 @@ class AddressModel {
     zipcode: map[addressFieldZipcode],
   );
 }
+List<AddressModel> addressList=[
+  AddressModel(
+    addressLine1: '6(i)/Fare Diya Complex',
+    addressLine2: '11/8,free school street,Panthapath',
+    city: 'Dhaka'
+  )
+];

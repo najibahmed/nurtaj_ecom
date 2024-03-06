@@ -29,21 +29,24 @@ class _CartPageState extends State<CartPage> {
                 },
               ),
             ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(8),
-                child: Row(
-                  children: [
-                    Expanded(
-                        child: Text(
-                          'SUB TOTAL: \$100',
-                          style: Theme.of(context).textTheme.headline6,
-                        )),
-                    OutlinedButton(
-                      onPressed:(){},
-                      child: const Text('CHEKCOUT'),
-                    )
-                  ],
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Row(
+                    children: [
+                      Expanded(
+                          child: Text(
+                            'SUB TOTAL: \$100',
+                            style: Theme.of(context).textTheme.headline6,
+                          )),
+                      OutlinedButton(
+                        onPressed:(){},
+                        child: const Text('CHEKCOUT'),
+                      )
+                    ],
+                  ),
                 ),
               ),
             ),

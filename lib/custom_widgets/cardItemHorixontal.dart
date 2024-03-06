@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:nurtaj_ecom_home/Pages/product_details_page.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
+
+import '../Views/detail/product_details_page.dart';
 
 class CardItemHorizontal extends StatelessWidget {
   final ProductModel productModel;

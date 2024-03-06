@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:nurtaj_ecom_home/Pages/product_details_page.dart';
+import 'package:flutter/widgets.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/cardItemHorixontal.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/countdown_timer.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
@@ -20,7 +20,7 @@ class SpecialDealContainer extends StatelessWidget {
             "gradient.png",
           ),
         )),
-        width: 415,
+        width: MediaQuery.of(context).size.width*1,
         height: 265,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -31,18 +31,20 @@ class SpecialDealContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 8),
-                    child: SizedBox(
-                      width: 180,
-                      height: 30,
-                      child: const Text(
-                        "Today Special Deal",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w800,
-                          fontSize: 22,
-                          // fontWeight: FontWeight.bold
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 6),
+                      child: SizedBox(
+                        width: 170,
+                        height: 30,
+                        child: const Text(
+                          "Today's Special Deal",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            // fontWeight: FontWeight.bold
+                          ),
                         ),
                       ),
                     ),
