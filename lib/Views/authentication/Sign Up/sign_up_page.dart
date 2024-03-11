@@ -1,28 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/authentication/Controller/authentication_controller.dart';
+import 'package:nurtaj_ecom_home/Views/authentication/Sign%20Up/otp_varification_screen.dart';
+import 'package:nurtaj_ecom_home/Views/authentication/login/signIn_page.dart';
 import '../../../custom_widgets/custom_form_field.dart';
 
-class SignUpScreen extends StatefulWidget {
+class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
   static const String routeName = "/signUpPage";
 
-
-  @override
-  State<SignUpScreen> createState() => _SignUpScreenState();
-}
-
-class _SignUpScreenState extends State<SignUpScreen> {
-  TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  final signUpFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     ///dependency
+    final authController=Get.put(AuthenticationController());
     final theme = Theme.of(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -31,7 +24,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       body: Form(
-        key: signUpFormKey,
+        key: authController.signUpFormKey,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: CustomScrollView(
@@ -53,32 +46,36 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           radius: 45,
                           child: Icon(
                             CupertinoIcons.person_fill,
-                            size: 60,
+                            size: 50,
                             color: theme.scaffoldBackgroundColor,
                           ),
                         ),
-                        Text(
-                          "Welcome Back!",
-                          style: theme.textTheme.titleLarge!.copyWith(fontSize: 24),
+                        Center(
+                          child: Text(
+                            "Welcome Back!",
+                            style: theme.textTheme.titleLarge!.copyWith(fontSize: 24),
+                          ),
                         ),
                         const SizedBox(height: 8),
-                        Text(
-                          "Please login to continue",
-                          style: theme.textTheme.bodySmall,
+                        Center(
+                          child: Text(
+                            "Please login to continue",
+                            style: theme.textTheme.bodySmall,
+                          ),
                         ),
                         const SizedBox(height: 20),
                         customFormField(
                           'Your Full name',
                           TextFormField(
-                            controller: nameController,
+                            controller: authController.nameController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               isDense: true,
-                              prefix: Icon(
-                                Icons.person,
-                                color: Colors.grey,
-                              ),
-                              hintText: 'Mahmud Saimon',
+                              // prefix: Icon(
+                              //   Icons.person,
+                              //   color: Colors.grey,
+                              // ),
+                              hintText: 'Najib Ahmed',
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
                                 borderRadius: BorderRadius.circular(12),
@@ -95,14 +92,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         customFormField(
                           'Your Email Address',
                           TextFormField(
-                            controller: emailController,
+                            controller: authController.emailController,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               isDense: true,
-                              prefix: Icon(
-                                Icons.mail,
-                                color: Colors.grey,
-                              ),
+                              // prefix: Icon(
+                              //   Icons.mail,
+                              //   color: Colors.grey,
+                              // ),
                               hintText: 'example@domain.com',
                               border: OutlineInputBorder(
                                 borderSide: BorderSide(color: Colors.white),
@@ -122,7 +119,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         customFormField(
                             'Password ',
                             TextFormField(
-                                controller: passwordController,
+                                controller: authController.passwordController,
                                 validator: (value) {
                                   if (value == null ||
                                       value.isEmpty ||
@@ -136,10 +133,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 obscuringCharacter: '•',
                                 decoration: InputDecoration(
                                   isDense: true,
-                                  prefix: Icon(
-                                    Icons.lock,
-                                    color: Colors.grey,
-                                  ),
+                                  // prefix: Icon(
+                                  //   Icons.lock,
+                                  //   color: Colors.grey,
+                                  // ),
                                   hintText: 'Hint_text@123',
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
@@ -149,7 +146,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         customFormField(
                             'Confirm Password ',
                             TextFormField(
-                                controller: confirmPasswordController,
+                                controller: authController.confirmPasswordController,
                                 validator: (value) {
                                   if (value == null ||
                                       value.isEmpty ||
@@ -163,10 +160,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 obscuringCharacter: '•',
                                 decoration: InputDecoration(
                                   isDense: true,
-                                  prefix: Icon(
-                                    Icons.lock,
-                                    color: Colors.grey,
-                                  ),
+                                  // prefix: Icon(
+                                  //   Icons.lock,
+                                  //   color: Colors.grey,
+                                  // ),
                                   hintText: 'Hint_text@123',
                                   border: OutlineInputBorder(
                                     borderSide: BorderSide(color: Colors.white),
@@ -189,40 +186,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // InkWell(
-                            //   splashColor: Colors.white,
-                            //   onTap: () {
-                            //     if (signUpFormKey.currentState!.validate()) {
-                            //       ScaffoldMessenger.of(context).showSnackBar(
-                            //         const SnackBar(
-                            //           content: Text(
-                            //               'Something went wrong. Please try again later.'),
-                            //         ),
-                            //       );
-                            //     }
-                            //   },
-                            //   child: Container(
-                            //     width: 170,
-                            //     height: 40,
-                            //     padding: EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
-                            //     decoration: BoxDecoration(
-                            //         gradient:
-                            //         LinearGradient(
-                            //           colors: <Color>[
-                            //             Color(0xFF0D47A1),
-                            //             Color(0xFF1976D2),
-                            //             Color(0xFF42A5F5),
-                            //           ],
-                            //         ),
-                            //         borderRadius: BorderRadius.circular(25.0)),
-                            //     child: Center(
-                            //       child: Text(
-                            //         "Sign up",
-                            //         style: TextStyle(color: Colors.white, fontSize: 16.0),
-                            //       ),
-                            //     ),
-                            //   ),
-                            // )
                             Container(
                               width: 170,
                               height: 40,
@@ -243,20 +206,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 ),
                                 child: Text("Sign up",style: TextStyle(color: Colors.white),),
                                 onPressed: () {
-                                  if (signUpFormKey.currentState!.validate()) {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Something went wrong. Please try again later.'),
-                                      ),
-                                    );
+                                  if (authController.signUpFormKey.currentState!.validate()) {
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>OtpVerifyScreen(email: authController.emailController.text)));
                                   }
                                 },
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         Row(
                           children: [
                             Expanded(
@@ -273,7 +231,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 )),
                           ],
                         ),
-                        SizedBox(height: 30),
+                        SizedBox(height: 20),
                         Row(
                           children: [
                             Expanded(
@@ -304,23 +262,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           ],
                         ),
                         SizedBox(height: 30),
-                        RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: 'Already have an account? ',
-                                  style: theme.textTheme.titleSmall),
-                              TextSpan(
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    // Get.to(SignUpScreen(),transition: Transition.rightToLeft );
-                                  },
-                                text: 'Sign in',
-                                style: theme.textTheme.titleMedium!.copyWith(
-                                    color: theme.primaryColor,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                            ])),
-                        const SizedBox(height: 20),
+                        Center(
+                          child: RichText(
+                              text: TextSpan(children: [
+                                TextSpan(
+                                    text: 'Already have an account? ',
+                                    style: theme.textTheme.titleSmall),
+                                TextSpan(
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushNamed(context, SignInPage.routeName);
+                                    },
+                                  text: 'Sign in',
+                                  style: theme.textTheme.titleMedium!.copyWith(
+                                      color: theme.primaryColor,
+                                      fontWeight: FontWeight.w700),
+                                ),
+                              ])),
+                        ),
+                        const SizedBox(height: 50),
                       ],
                     ),
                   ]))

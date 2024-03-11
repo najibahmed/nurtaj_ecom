@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/models/cart_model.dart';
+
+import '../Views/cart/cart_controller.dart';
 
 class CartItemView extends StatelessWidget {
   CartModel cartModel;
@@ -7,6 +10,7 @@ class CartItemView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController=Get.put(CartController());
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Card(
@@ -26,7 +30,9 @@ class CartItemView extends StatelessWidget {
             Row(
               children: [
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartController.decreaseQuantity(cartModel);
+                  },
                   icon: const Icon(
                     Icons.remove_circle,
                     size: 30,
@@ -35,12 +41,14 @@ class CartItemView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(
-                    '5',
+                    '${cartModel.quantity}',
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    cartController.increaseQuantity(cartModel);
+                  },
                   icon: const Icon(
                     Icons.add_circle,
                     size: 30,

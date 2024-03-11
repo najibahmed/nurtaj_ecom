@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_countdown_timer/index.dart';
+import 'package:nurtaj_ecom_home/const/constants.dart';
 
 class CountDownTimer extends StatefulWidget {
   const CountDownTimer({super.key,});
@@ -13,13 +14,19 @@ class CountDownTimer extends StatefulWidget {
 class _CountDownTimerState extends State<CountDownTimer> {
 
   late CountdownTimerController controller;
-  int endTime = DateTime.now().millisecondsSinceEpoch + 12 * 3600000;
+  // int endTime = DateTime.now().millisecondsSinceEpoch + 12 * 3600000;
   // DateTime endtime= DateTime.now().add(const Duration(hours: 3));
   @override
   void initState() {
     super.initState();
-    controller = CountdownTimerController(endTime: endTime, onEnd: onEnd,);
+    controller = CountdownTimerController(endTime: endTimeDuration, onEnd: onEnd,);
     super.initState();
+  }
+@override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    super.dispose();
   }
 
   void onEnd() {
@@ -31,7 +38,7 @@ class _CountDownTimerState extends State<CountDownTimer> {
     return Center(
       child: CountdownTimer(
         // controller: controller,
-        endTime: endTime,
+        endTime: endTimeDuration,
         widgetBuilder: (_, time) {
           if (time == null) {
             return const Text('Timer over');
@@ -104,9 +111,5 @@ class _CountDownTimerState extends State<CountDownTimer> {
     );
   }
 
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
+
 }

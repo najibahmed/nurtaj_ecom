@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/cardItemHorixontal.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/countdown_timer.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
@@ -10,17 +12,18 @@ class SpecialDealContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.put(CartController());
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 12),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
           fit: BoxFit.fill,
           image: AssetImage(
-            "gradient.png",
+            "assets/gradient.png",
           ),
         )),
-        width: MediaQuery.of(context).size.width*1,
+        width: MediaQuery.of(context).size.width * 1,
         height: 265,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -49,6 +52,7 @@ class SpecialDealContainer extends StatelessWidget {
                       ),
                     ),
                   ),
+
                   /// Timer Countdown Widget
                   const CountDownTimer(),
                 ],
@@ -59,10 +63,10 @@ class SpecialDealContainer extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: specialDealList.length,
+                  itemCount: cartController.productList.length,
                   itemBuilder: (context, index) {
                     return CardItemHorizontal(
-                      productModel: specialDealList[index]);
+                        productModel: cartController.productList[index]);
                   },
                 ),
               ),

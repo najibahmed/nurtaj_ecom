@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:nurtaj_ecom_home/models/product_model.dart';
-
-import '../../Helper Function/helper_function.dart';
+import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/product%20details/controller/product_details_controller.dart';
+import 'package:nurtaj_ecom_home/models/product_models.dart';
+import '../../common/Helper Function/helper_function.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -15,23 +16,11 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _MovieInfoState extends State<ProductDetails> {
-  late ProductModel product;
-  bool inCart = false;
-  bool isfavourite = false;
-  double userRating = 0;
-  TextEditingController txtController = TextEditingController();
-  FocusNode focusNode = FocusNode();
-
-  @override
-  void dispose() {
-    txtController.dispose();
-    // TODO: implement dispose
-    super.dispose();
-  }
-
+  late ProductModels productModels;
+  final detailsController=Get.put(ProductDetailsController());
   @override
   void didChangeDependencies() {
-    product = ModalRoute.of(context)!.settings.arguments as ProductModel;
+    productModels = ModalRoute.of(context)!.settings.arguments as ProductModels;
     super.didChangeDependencies();
   }
 
@@ -42,7 +31,7 @@ class _MovieInfoState extends State<ProductDetails> {
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.white,
-            title: Text(product.title),
+            title: Text(productModels.productName),
             bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(100),
                 child: Padding(
@@ -50,9 +39,11 @@ class _MovieInfoState extends State<ProductDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      extraImageShow(product.image),
+                      extraImageShow(productModels.additionalImages[0]),
                       const SizedBox(width: 10),
-                      extraImageShow(product.image),
+                      extraImageShow(productModels.additionalImages[1]),
+                      const SizedBox(width: 10),
+                      extraImageShow(productModels.additionalImages[2]),
                     ],
                   ),
                 )),
@@ -60,14 +51,14 @@ class _MovieInfoState extends State<ProductDetails> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
-                tag: product.title,
+                tag: productModels.productName,
                 child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40),
                     ),
                     child: Image.asset(
-                      product.image,
+                      productModels.thumbnailImageUrl,
                       fit: BoxFit.cover,
                     )),
               ),
@@ -95,7 +86,7 @@ class _MovieInfoState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        product.title,
+                        productModels.productName,
                         style: const TextStyle(fontSize: 20,color: Colors.white),
                       ),
                     ),
@@ -108,35 +99,33 @@ class _MovieInfoState extends State<ProductDetails> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            isfavourite = !isfavourite;
-                          });
-                        },
-                        icon: Icon(isfavourite
-                            ? Icons.favorite
-                            : Icons.favorite_border_outlined),
-                        label: Text(isfavourite
-                            ? 'Remove From Favourite'
-                            : 'ADD TO FAVORITE'),
+                      child: Obx(()=>OutlinedButton.icon(
+                          onPressed: () {
+                            detailsController.isfavourite.value = detailsController.isfavourite.isFalse;
+                          },
+                          icon: Icon(detailsController.isfavourite.isTrue
+                              ? Icons.favorite
+                              : Icons.favorite_border_outlined),
+                          label: Text(detailsController.isfavourite.isTrue
+                              ? 'Remove From Favourite'
+                              : 'ADD TO FAVORITE'),
+                        ),
                       ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                      child: OutlinedButton.icon(
-                        onPressed: () {
-                          setState(() {
-                            inCart = !inCart;
-                          });
-                        },
-                        icon: Icon(inCart
-                            ? Icons.remove_shopping_cart
-                            : Icons.add_shopping_cart),
-                        label:
-                            Text(inCart ? 'Remove From Cart' : 'ADD TO Cart'),
+                      child: Obx(()=>OutlinedButton.icon(
+                          onPressed: () {
+                          detailsController.inCart.value = detailsController.inCart.isFalse;
+                          },
+                          icon: Icon(detailsController.inCart.isTrue
+                              ? Icons.remove_shopping_cart
+                              : Icons.add_shopping_cart),
+                          label:
+                              Text(detailsController.inCart.isTrue ? 'Remove From Cart' : 'ADD TO Cart'),
+                        ),
                       ),
                     )
                   ],
@@ -164,7 +153,7 @@ class _MovieInfoState extends State<ProductDetails> {
                               color: Colors.amber,
                             ),
                             onRatingUpdate: (rating) {
-                              userRating = rating;
+                              detailsController.userRating.value = rating;
                             },
                           ),
                         ),
@@ -195,18 +184,22 @@ class _MovieInfoState extends State<ProductDetails> {
                         padding: const EdgeInsets.all(8),
                         child: TextField(
                           maxLines: 3,
-                          controller: txtController,
-                          focusNode: focusNode,
+                          controller: detailsController.commentController,
+                          focusNode: detailsController.focusNode,
                           decoration:
                               InputDecoration(border: OutlineInputBorder()),
                         ),
                       ),
                       OutlinedButton(
                         onPressed: () async {
+                          if (detailsController.commentController.text.isEmpty) {
+                            showMsg(context, 'Please provide a comment');
+                            return;
+                          }
                           EasyLoading.show(status: 'Please wait');
                           Future.delayed(Duration(seconds: 3), () {
                             EasyLoading.dismiss();
-                            focusNode.unfocus();
+                            detailsController.focusNode.unfocus();
                           });
                         },
                         child: const Text('SUBMIT'),

@@ -3,13 +3,12 @@
 import 'package:flutter/material.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
 
-import '../Views/detail/product_details_page.dart';
+import '../Views/product details/product_details_page.dart';
+import '../models/product_models.dart';
 
 class ProductGridItemView extends StatelessWidget {
-  ProductModel productModel;
-
-   ProductGridItemView({Key? key,required this.productModel })
-      : super(key: key);
+    ProductModels productModel;
+    ProductGridItemView({super.key,required this.productModel});
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +25,15 @@ class ProductGridItemView extends StatelessWidget {
             child: Column(
               children: [
                 Expanded(
-                    child: Image.asset(productModel.image,fit: BoxFit.contain,width: 186,
+                    child: Image.asset(productModel.thumbnailImageUrl,fit: BoxFit.contain,width: 186,
                       height: 150,)
                 ),
-                Text(productModel.title,
+                Text(productModel.productName,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16
                   ),),
-                Text(productModel.title,
+                Text(productModel.salePrice.toString(),
                   style: const TextStyle(
                     color: Colors.grey,
                     fontSize: 13

@@ -24,11 +24,14 @@ class tabBarGridItems extends StatelessWidget {
               ),
             )),
         Positioned(
-            right: 20,
-            bottom: 20,
-            child: ElevatedButton(
+            right: 10,
+            bottom: 10,
+            child: TextButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.black54
+              ),
               onPressed: (){},
-              child: Text('Load More'),
+              child: Text('Load More',style: TextStyle(color: Colors.white),),
             )
         )
       ],

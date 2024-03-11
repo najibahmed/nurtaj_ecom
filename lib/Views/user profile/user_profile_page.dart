@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:nurtaj_ecom_home/models/address_model.dart';
 import 'package:nurtaj_ecom_home/models/user_model.dart';
 
-import '../../Helper Function/widget_function.dart';
+import '../../common/Helper Function/widget_function.dart';
+
 
 class UserProfilePage extends StatefulWidget {
   static const String routeName = '/profile';

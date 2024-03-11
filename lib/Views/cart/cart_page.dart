@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/card_item_view.dart';
 import 'package:nurtaj_ecom_home/models/cart_model.dart';
 

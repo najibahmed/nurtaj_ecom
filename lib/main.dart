@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-
-
+import 'package:nurtaj_ecom_home/Views/authentication/Sign%20Up/otp_varification_screen.dart';
 import 'Views/authentication/Sign Up/sign_up_page.dart';
 import 'Views/authentication/login/signIn_page.dart';
 import 'Views/cart/cart_page.dart';
 import 'Views/home/home_page.dart';
-import 'Views/detail/product_details_page.dart';
+import 'Views/product details/product_details_page.dart';
 import 'Views/user profile/user_profile_page.dart';
 
 void main() {

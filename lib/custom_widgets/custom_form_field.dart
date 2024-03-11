@@ -12,7 +12,7 @@ customFormField(String title,Widget child){
     ),
     child: Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Expanded(child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -22,7 +22,7 @@ customFormField(String title,Widget child){
           ),
           child
         ],
-      )),
+      ),
     ),
   );
 }

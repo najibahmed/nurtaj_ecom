@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
+import '../Views/cart/cart_controller.dart';
 import '../models/product_model.dart';
 import 'cardItemHorixontal.dart';
 
 class CustomHorizonList extends StatelessWidget {
   final String title;
   final String buttonTitle;
-  const CustomHorizonList({super.key,required this.title,required this.buttonTitle});
+  const CustomHorizonList(
+      {super.key, required this.title, required this.buttonTitle});
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 12),
+    final cartController = Get.put(CartController());
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Container(
-        width:MediaQuery.of(context).size.width,
+        width: MediaQuery.of(context).size.width,
         height: 280,
         decoration: BoxDecoration(
           color: Colors.grey[300],
@@ -34,7 +38,7 @@ class CustomHorizonList extends StatelessWidget {
                     child: SizedBox(
                       width: 200,
                       height: 30,
-                      child:  Text(
+                      child: Text(
                         title,
                         style: TextStyle(
                           color: Colors.black,
@@ -52,10 +56,10 @@ class CustomHorizonList extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: specialDealList.length,
+                  itemCount: cartController.productList.length,
                   itemBuilder: (context, index) {
                     return CardItemHorizontal(
-                        productModel: specialDealList[index]);
+                        productModel: cartController.productList[index]);
                   },
                 ),
               ),
@@ -63,14 +67,13 @@ class CustomHorizonList extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: ElevatedButton(
-                  onPressed: (){},
+                  onPressed: () {},
                   child: Text(
                     buttonTitle,
                     style: TextStyle(
                       color: Colors.black,
                     ),
-                  )
-              ),
+                  )),
             )
           ],
         ),
