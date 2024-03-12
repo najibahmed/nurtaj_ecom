@@ -49,6 +49,7 @@ dependencies:
   pinput: ^4.0.0
   google_fonts: any
   animate_do:
+  shared_preferences: ^2.2.2
 
 dev_dependencies:
   flutter_test:

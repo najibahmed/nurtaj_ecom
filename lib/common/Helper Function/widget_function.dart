@@ -38,3 +38,36 @@ showSingleTextInputDialog({
         ],
       ));
 }
+showAlertDialog({
+  required BuildContext context,
+  required String title,
+  String positiveButtonText = 'OK',
+  String negativeButtonText = 'CLOSE',
+  required Function() onSubmit,
+}) {
+
+  showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(title),
+        // content: Padding(
+        //   padding: const EdgeInsets.all(12),
+        //   child: Text(
+        //     '$title',
+        //   ),
+        // ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(negativeButtonText),
+          ),
+          TextButton(
+            onPressed: () {
+              onSubmit();
+              Navigator.pop(context);
+            },
+            child: Text(positiveButtonText),
+          )
+        ],
+      ));
+}

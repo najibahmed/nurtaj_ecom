@@ -1,28 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
-import 'package:nurtaj_ecom_home/const/color.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/custom_horizontal_list.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/homepage_slider.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/product_grid_item_view.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/special_deal_container.dart';
-import 'package:nurtaj_ecom_home/models/product_model.dart';
 import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
-import '../../const/constants.dart';
+import '../../common/const/color.dart';
+import '../../common/const/constants.dart';
 import '../Drawer/custom_dawer.dart';
 import '../../custom_widgets/custom_tab_view.dart';
 import '../cart/cart_page.dart';
 import '../user profile/user_profile_page.dart';
 
-class MyHomePage extends StatefulWidget {
-  static const String routeName = '/';
-  const MyHomePage({super.key});
+class DashBoardPage extends StatefulWidget {
+  static const String routeName = '/home';
+  const DashBoardPage({super.key});
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<DashBoardPage> createState() => _DashBoardPageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _DashBoardPageState extends State<DashBoardPage> {
   final cartController=Get.put(CartController());
   PageController controller = PageController();
   dynamic selected;
@@ -131,7 +130,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             child: Container(
                               height: 35,
                               decoration: BoxDecoration(
-                                color: Colors.grey.withOpacity(.15),
+                                color: Colors.grey.withOpacity(.25),
                                 borderRadius: BorderRadius.circular(20),
                                 // border: Border.all(width: 1, color: Colors.black),
                               ),

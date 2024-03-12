@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_countdown_timer/countdown_timer_controller.dart';
 import 'package:flutter_countdown_timer/flutter_countdown_timer.dart';
 import 'package:flutter_countdown_timer/index.dart';
-import 'package:nurtaj_ecom_home/const/constants.dart';
+
+import '../common/const/constants.dart';
 
 class CountDownTimer extends StatefulWidget {
   const CountDownTimer({super.key,});

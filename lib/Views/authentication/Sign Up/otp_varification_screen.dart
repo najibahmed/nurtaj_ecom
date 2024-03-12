@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:nurtaj_ecom_home/Views/home/home_page.dart';
+import 'package:nurtaj_ecom_home/Views/home/dashBoard_page.dart';
 import 'package:pinput/pinput.dart';
+
+import '../login/signIn_page.dart';
 
 class OtpVerifyScreen extends StatefulWidget {
   static const String routeName='/OtpVerification';
@@ -158,7 +160,7 @@ class _OtpVerifyScreenState extends State<OtpVerifyScreen> {
                       //     showError=true;
                       //   });
                       // }
-                      Navigator.popAndPushNamed(context,MyHomePage.routeName);
+                      Get.offAll(SignInPage(),transition: Transition.rightToLeftWithFade );
                     },
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size.fromHeight(55)),

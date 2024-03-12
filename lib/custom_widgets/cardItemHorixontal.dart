@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:nurtaj_ecom_home/const/color.dart';
-import 'package:nurtaj_ecom_home/const/constants.dart';
+import 'package:get/get.dart';
 import '../Views/product details/product_details_page.dart';
+import '../common/const/color.dart';
+import '../common/const/constants.dart';
 import '../models/product_models.dart';
 
 class CardItemHorizontal extends StatelessWidget {
@@ -15,8 +16,7 @@ class CardItemHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => Navigator.pushNamed(context, ProductDetails.routeName,
-            arguments: productModel),
+        onTap: () => Get.to(ProductDetails(),arguments:productModel),
         child: Card(
           elevation: 8,
           child: Stack(

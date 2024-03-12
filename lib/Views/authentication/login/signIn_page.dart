@@ -3,7 +3,10 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/Sign%20Up/sign_up_page.dart';
+import 'package:nurtaj_ecom_home/common/tools/dialog.dart';
+import 'package:nurtaj_ecom_home/sevices/cache_storage/local_storage.dart';
 import '../../../custom_widgets/custom_form_field.dart';
+import '../../home/dashBoard_page.dart';
 import '../Controller/authentication_controller.dart';
 
 class SignInPage extends StatelessWidget {
@@ -22,7 +25,7 @@ class SignInPage extends StatelessWidget {
         ),
       ),
       body: Form(
-        key: authController.formKey,
+        key: authController.signInformKey,
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: CustomScrollView(
@@ -147,14 +150,14 @@ class SignInPage extends StatelessWidget {
                           "Sign in",
                           style: TextStyle(color: Colors.white),
                         ),
-                        onPressed: () {
-                          if (authController.formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text(
-                                    'Something went wrong. Please try again later.'),
-                              ),
-                            );
+                        onPressed: () async{
+                          if (authController.signInformKey.currentState!.validate())  {
+                            String? userMapString= await LocalStorage.getUser(authController.emailControllerSignUP.text.toString());
+                            if(userMapString==null || userMapString.isEmpty){
+                              authenticationErrorDialog("Error Login", "User Not Found");
+                            }else{
+                              Get.offAll(DashBoardPage(),transition: Transition.rightToLeftWithFade  );
+                            }
                           }
                         },
                       ),
@@ -223,7 +226,7 @@ class SignInPage extends StatelessWidget {
                     TextSpan(
                       recognizer: TapGestureRecognizer()
                         ..onTap = () {
-                          Navigator.pushNamed(context, SignUpScreen.routeName);
+                          Get.to(SignUpScreen());
                         },
                       text: 'Register Now ',
                       style: theme.textTheme.titleMedium!.copyWith(

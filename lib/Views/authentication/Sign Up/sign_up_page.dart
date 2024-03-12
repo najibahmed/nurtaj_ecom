@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/Controller/authentication_controller.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/Sign%20Up/otp_varification_screen.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/login/signIn_page.dart';
+import 'package:nurtaj_ecom_home/sevices/cache_storage/local_storage.dart';
 import '../../../custom_widgets/custom_form_field.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -92,7 +93,7 @@ class SignUpScreen extends StatelessWidget {
                         customFormField(
                           'Your Email Address',
                           TextFormField(
-                            controller: authController.emailController,
+                            controller: authController.emailControllerSignUP,
                             keyboardType: TextInputType.emailAddress,
                             decoration: InputDecoration(
                               isDense: true,
@@ -119,7 +120,7 @@ class SignUpScreen extends StatelessWidget {
                         customFormField(
                             'Password ',
                             TextFormField(
-                                controller: authController.passwordController,
+                                controller: authController.passwordControllerSignUp,
                                 validator: (value) {
                                   if (value == null ||
                                       value.isEmpty ||
@@ -207,7 +208,8 @@ class SignUpScreen extends StatelessWidget {
                                 child: Text("Sign up",style: TextStyle(color: Colors.white),),
                                 onPressed: () {
                                   if (authController.signUpFormKey.currentState!.validate()) {
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>OtpVerifyScreen(email: authController.emailController.text)));
+                                    LocalStorage.saveUser(authController.emailControllerSignUP.text.toString());
+                                    Get.to(OtpVerifyScreen(email: authController.emailControllerSignUP.text),transition: Transition.rightToLeft);
                                   }
                                 },
                               ),
@@ -271,7 +273,7 @@ class SignUpScreen extends StatelessWidget {
                                 TextSpan(
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
-                                      Navigator.pushNamed(context, SignInPage.routeName);
+                                     Get.to(SignInPage());
                                     },
                                   text: 'Sign in',
                                   style: theme.textTheme.titleMedium!.copyWith(

@@ -4,10 +4,10 @@ import 'package:get/get.dart';
 class AuthenticationController extends GetxController{
 
   final signUpFormKey = GlobalKey<FormState>();
-  final formKey = GlobalKey<FormState>();
+  final signInformKey = GlobalKey<FormState>();
   TextEditingController nameController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailControllerSignUP = TextEditingController();
+  TextEditingController passwordControllerSignUp = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController emailControllerSignIn = TextEditingController();
   TextEditingController passwordControllerSignIn = TextEditingController();
