@@ -152,12 +152,9 @@ class SignInPage extends StatelessWidget {
                         ),
                         onPressed: () async{
                           if (authController.signInformKey.currentState!.validate())  {
-                            String? userMapString= await LocalStorage.getUser(authController.emailControllerSignUP.text.toString());
-                            if(userMapString==null || userMapString.isEmpty){
-                              authenticationErrorDialog("Error Login", "User Not Found");
-                            }else{
-                              Get.offAll(DashBoardPage(),transition: Transition.rightToLeftWithFade  );
-                            }
+                              authController.signIn(context).then((value) {
+                                Get.off(context);
+                              });
                           }
                         },
                       ),

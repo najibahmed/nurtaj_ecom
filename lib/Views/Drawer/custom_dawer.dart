@@ -7,13 +7,12 @@ import 'package:nurtaj_ecom_home/sevices/cache_storage/local_storage.dart';
 import '../cart/cart_page.dart';
 import '../user profile/user_profile_page.dart';
 
-
 class DrawerPage extends StatelessWidget {
   const DrawerPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return  Drawer(
+    return Drawer(
       child: Padding(
         padding: EdgeInsets.all(18.0),
         child: Column(
@@ -28,13 +27,13 @@ class DrawerPage extends StatelessWidget {
               leading: const Icon(Icons.person),
               title: const Text('My Profile'),
             ),
-              ListTile(
-                onTap: () {
-                 Get.to(CartPage());
-                },
-                leading: const Icon(Icons.shopping_cart),
-                title: const Text('My Cart'),
-              ),
+            ListTile(
+              onTap: () {
+                Get.to(CartPage());
+              },
+              leading: const Icon(Icons.shopping_cart),
+              title: const Text('My Cart'),
+            ),
             ListTile(
               title: Text("Orders"),
               leading: Icon(Icons.list_alt_outlined),
@@ -42,7 +41,7 @@ class DrawerPage extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-               Get.to(SignInPage());
+                Get.to(SignInPage());
               },
               leading: const Icon(Icons.person),
               title: const Text('Login/Register'),
@@ -52,11 +51,10 @@ class DrawerPage extends StatelessWidget {
                 showAlertDialog(
                     context: context,
                     title: 'Are you Sure to LogOut',
-                    onSubmit: (){
-                      LocalStorage.logOut();
-                      Get.offAll(()=>SignInPage());
-                    }
-                );
+                    onSubmit: () {
+                      LocalStorage.setLoginStatus(false);
+                      Get.offAll(SignInPage());
+                    });
               },
               leading: const Icon(Icons.logout),
               title: const Text('Logout'),
@@ -64,7 +62,6 @@ class DrawerPage extends StatelessWidget {
           ],
         ),
       ),
-
     );
   }
 }

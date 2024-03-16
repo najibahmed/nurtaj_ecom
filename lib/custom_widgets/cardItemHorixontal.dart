@@ -16,7 +16,7 @@ class CardItemHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => Get.to(ProductDetails(),arguments:productModel),
+        onTap: () => Get.to(()=>ProductDetails(),arguments:productModel),
         child: Card(
           elevation: 8,
           child: Stack(

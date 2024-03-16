@@ -11,7 +11,6 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      builder: EasyLoading.init(),
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -19,7 +18,7 @@ class MainApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const RedirectScreen(),
-      // initialRoute: AppPages.INITIAL,
+      builder: EasyLoading.init(),
       // getPages: AppPages.routes,
     );
   }

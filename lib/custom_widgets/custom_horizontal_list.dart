@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/home/controller/dashBoard_controller.dart';
 
 import '../Views/cart/cart_controller.dart';
 import '../models/product_model.dart';
@@ -13,7 +14,7 @@ class CustomHorizonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cartController = Get.put(CartController());
+    final dashBoardController = Get.put(DashBoardController());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Container(
@@ -56,10 +57,10 @@ class CustomHorizonList extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: cartController.productList.length,
+                  itemCount: dashBoardController.productList.length,
                   itemBuilder: (context, index) {
                     return CardItemHorizontal(
-                        productModel: cartController.productList[index]);
+                        productModel: dashBoardController.productList[index]);
                   },
                 ),
               ),

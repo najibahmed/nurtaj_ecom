@@ -208,8 +208,9 @@ class SignUpScreen extends StatelessWidget {
                                 child: Text("Sign up",style: TextStyle(color: Colors.white),),
                                 onPressed: () {
                                   if (authController.signUpFormKey.currentState!.validate()) {
-                                    LocalStorage.saveUser(authController.emailControllerSignUP.text.toString());
-                                    Get.to(OtpVerifyScreen(email: authController.emailControllerSignUP.text),transition: Transition.rightToLeft);
+                                    authController.signUp(context).then((value) {
+                                      Get.off(context);
+                                    });
                                   }
                                 },
                               ),

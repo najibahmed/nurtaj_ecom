@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
 import 'package:nurtaj_ecom_home/Views/product%20details/controller/product_details_controller.dart';
 import 'package:nurtaj_ecom_home/models/product_models.dart';
 import '../../common/Helper Function/helper_function.dart';
@@ -16,16 +17,14 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _MovieInfoState extends State<ProductDetails> {
-  late ProductModels productModels;
-  final detailsController=Get.put(ProductDetailsController());
-  @override
-  void didChangeDependencies() {
-    productModels = ModalRoute.of(context)!.settings.arguments as ProductModels;
-    super.didChangeDependencies();
-  }
+  // late ProductModels productModels;
+
 
   @override
   Widget build(BuildContext context) {
+    final detailsController=Get.put(ProductDetailsController());
+    final cartController=Get.put(CartController());
+    final productModels=Get.arguments ;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -99,7 +98,8 @@ class _MovieInfoState extends State<ProductDetails> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Obx(()=>OutlinedButton.icon(
+                      child: Obx((){
+                        return OutlinedButton.icon(
                           onPressed: () {
                             detailsController.isfavourite.value = detailsController.isfavourite.isFalse;
                           },
@@ -109,23 +109,32 @@ class _MovieInfoState extends State<ProductDetails> {
                           label: Text(detailsController.isfavourite.isTrue
                               ? 'Remove From Favourite'
                               : 'ADD TO FAVORITE'),
-                        ),
+                        );
+                      }
                       ),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                      child: Obx(()=>OutlinedButton.icon(
+                      child: Obx((){
+                        final isInCart= cartController.isProductInCart(productModels.productId!);
+                        return OutlinedButton.icon(
                           onPressed: () {
-                          detailsController.inCart.value = detailsController.inCart.isFalse;
+                           if(isInCart){
+                             cartController.removeFromCart(productModels.productId!);
+                           }else{
+                             cartController.addToCart(productModels);
+                           }
+                            // detailsController.inCart.value = detailsController.inCart.isFalse;
                           },
-                          icon: Icon(detailsController.inCart.isTrue
+                          icon: Icon(isInCart
                               ? Icons.remove_shopping_cart
                               : Icons.add_shopping_cart),
                           label:
-                              Text(detailsController.inCart.isTrue ? 'Remove From Cart' : 'ADD TO Cart'),
-                        ),
+                          Text(isInCart ? 'Remove From Cart' : 'ADD TO Cart'),
+                        );
+                      },
                       ),
                     )
                   ],
@@ -217,6 +226,8 @@ class _MovieInfoState extends State<ProductDetails> {
 
   Container extraImageShow(String url) {
     return Container(
+      height: 100,
+      width: 100,
       padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
@@ -224,7 +235,7 @@ class _MovieInfoState extends State<ProductDetails> {
           borderRadius: BorderRadius.circular(10),
           child: Image.asset(
             url,
-            fit: BoxFit.fitHeight,
+            fit: BoxFit.cover,
           )),
     );
   }

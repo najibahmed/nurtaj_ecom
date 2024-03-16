@@ -43,7 +43,7 @@ showAlertDialog({
   required String title,
   String positiveButtonText = 'OK',
   String negativeButtonText = 'CLOSE',
-  required Function() onSubmit,
+  required VoidCallback onSubmit,
 }) {
 
   showDialog(
@@ -62,10 +62,11 @@ showAlertDialog({
             child: Text(negativeButtonText),
           ),
           TextButton(
-            onPressed: () {
-              onSubmit();
-              Navigator.pop(context);
-            },
+            onPressed: onSubmit,
+            //     ()=> {
+            //       // onSubmit
+            //   // Navigator.pop(context);
+            // },
             child: Text(positiveButtonText),
           )
         ],

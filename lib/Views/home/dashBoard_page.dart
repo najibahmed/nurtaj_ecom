@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
+import 'package:nurtaj_ecom_home/Views/home/controller/dashBoard_controller.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/custom_horizontal_list.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/homepage_slider.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/product_grid_item_view.dart';
@@ -22,77 +23,76 @@ class DashBoardPage extends StatefulWidget {
 }
 
 class _DashBoardPageState extends State<DashBoardPage> {
-  final cartController=Get.put(CartController());
   PageController controller = PageController();
   dynamic selected;
 
-
   @override
   Widget build(BuildContext context) {
+    final dashBoardController=Get.put(DashBoardController());
     return Scaffold(
       extendBody: true,
 
       ///bottom navigation bar
       bottomNavigationBar: StylishBottomBar(
-        items: [
-          BottomBarItem(
-            icon: const Icon(
-              Icons.house_outlined,
+          items: [
+            BottomBarItem(
+              icon: const Icon(
+                Icons.house_outlined,
+              ),
+              selectedIcon: const Icon(Icons.house_rounded),
+              selectedColor: Colors.blue,
+              unSelectedColor: Colors.deepOrangeAccent,
+              title: const Text('Home'),
+              // badge: const Text('9+'),
+              // showBadge: true,
             ),
-            selectedIcon: const Icon(Icons.house_rounded),
-            selectedColor: Colors.blue,
-            unSelectedColor: Colors.deepOrangeAccent,
-            title: const Text('Home'),
-            // badge: const Text('9+'),
-            // showBadge: true,
+            BottomBarItem(
+                icon: const Icon(
+                  Icons.notifications,
+                ),
+                selectedIcon: const Icon(
+                  Icons.notifications_active,
+                ),
+                unSelectedColor: Colors.deepOrangeAccent,
+                selectedColor: Colors.blue,
+                title: const Text('Style')),
+            BottomBarItem(
+                icon: const Icon(
+                  Icons.shopping_cart,
+                ),
+                selectedIcon: const Icon(
+                  Icons.shopping_cart_checkout_outlined,
+                ),
+                unSelectedColor: Colors.deepOrangeAccent,
+                selectedColor: Colors.blue,
+                title: const Text('Style')),
+            BottomBarItem(
+                icon: const Icon(
+                  Icons.person_outline,
+                ),
+                selectedIcon: const Icon(
+                  Icons.person,
+                ),
+                unSelectedColor: Colors.deepOrangeAccent,
+                selectedColor: Colors.blue,
+                title: const Text('Profile')),
+          ],
+          borderRadius: BorderRadius.circular(20),
+          option: AnimatedBarOptions(
+            iconSize: 32,
+            barAnimation: BarAnimation.fade,
+            iconStyle: IconStyle.animated,
           ),
-          BottomBarItem(
-              icon: const Icon(
-                Icons.notifications,
-              ),
-              selectedIcon: const Icon(
-                Icons.notifications_active,
-              ),
-              unSelectedColor: Colors.deepOrangeAccent,
-              selectedColor: Colors.blue,
-              title: const Text('Style')),
-          BottomBarItem(
-              icon: const Icon(
-                Icons.shopping_cart,
-              ),
-              selectedIcon: const Icon(
-                Icons.shopping_cart_checkout_outlined,
-              ),
-              unSelectedColor: Colors.deepOrangeAccent,
-              selectedColor: Colors.blue,
-              title: const Text('Style')),
-          BottomBarItem(
-              icon: const Icon(
-                Icons.person_outline,
-              ),
-              selectedIcon: const Icon(
-                Icons.person,
-              ),
-              unSelectedColor: Colors.deepOrangeAccent,
-              selectedColor: Colors.blue,
-              title: const Text('Profile')),
-        ],
-        borderRadius: BorderRadius.circular(20),
-        option: AnimatedBarOptions(
-          iconSize: 32,
-          barAnimation: BarAnimation.fade,
-          iconStyle: IconStyle.animated,
+          // hasNotch: true,
+          currentIndex: selected ?? 0,
+          // fabLocation: StylishBarFabLocation.center,
+          onTap: (index) {
+            setState(() {
+              selected=index;
+              controller.jumpToPage(index);
+            });
+          },
         ),
-        // hasNotch: true,
-        // fabLocation: StylishBarFabLocation.center,
-        currentIndex: selected ?? 0,
-        onTap: (index) {
-          setState(() {
-            selected = index;
-            controller.jumpToPage(index);
-          });
-        },
-      ),
 
       /// floating action button
       // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
@@ -160,6 +160,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                           ),
                         ),
                       ),
+                      /// Action Buttons
                       actions: [
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -169,8 +170,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    Navigator.pushNamed(
-                                        context, CartPage.routeName);
+                                    Get.to(const CartPage());
                                   },
                                   icon: const Icon(
                                     Icons.shopping_cart,
@@ -232,8 +232,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
                   /// Bottom Grid List Custom Card View
                   SliverGrid(
                       delegate: SliverChildBuilderDelegate(
-                          childCount: cartController.productList.length, (context, index) {
-                        final product = cartController.productList[index];
+                          childCount: dashBoardController.productList.length, (context, index) {
+                        final product = dashBoardController.productList[index];
                         return ProductGridItemView( productModel: product,);
                       }),
                       gridDelegate:

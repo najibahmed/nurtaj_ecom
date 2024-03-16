@@ -9,7 +9,7 @@ const String cartFieldCategoryId = 'categoryId';
 
 class CartModel {
   String productId;
-  String categoryId;
+  // String categoryId;
   String productName;
   String productImageUrl;
   num quantity;
@@ -17,7 +17,7 @@ class CartModel {
 
   CartModel(
       {required this.productId,
-        required this.categoryId,
+        // required this.categoryId,
         required this.productName,
         required this.productImageUrl,
         this.quantity = 1,
@@ -26,7 +26,7 @@ class CartModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       cartFieldProductId: productId,
-      cartFieldCategoryId: categoryId,
+      // cartFieldCategoryId: categoryId,
       cartFieldProductName: productName,
       cartFieldProductImageUrl: productImageUrl,
       cartFieldQuantity: quantity,
@@ -36,19 +36,11 @@ class CartModel {
 
   factory CartModel.fromMap(Map<String, dynamic> map) => CartModel(
     productId: map[cartFieldProductId],
-    categoryId: map[cartFieldCategoryId],
+    // categoryId: map[cartFieldCategoryId],
     productName: map[cartFieldProductName],
     productImageUrl: map[cartFieldProductImageUrl],
     quantity: map[cartFieldQuantity],
     salePrice: map[cartFieldSalePrice],
   );
 }
-  List<CartModel>cartList=[
-  CartModel(
-      productId: '180119',
-      categoryId: '180118',
-      productName: 'Men suite',
-      productImageUrl: 'assets/men_suite.png',
-      salePrice: 20
-  )
-];
+

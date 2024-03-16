@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
+import 'package:nurtaj_ecom_home/Views/home/controller/dashBoard_controller.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/cardItemHorixontal.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/countdown_timer.dart';
-import 'package:nurtaj_ecom_home/models/product_model.dart';
+
 
 class SpecialDealContainer extends StatelessWidget {
   const SpecialDealContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final cartController = Get.put(CartController());
+    final dashBoardController = Get.put(DashBoardController());
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Container(
@@ -63,10 +63,10 @@ class SpecialDealContainer extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: cartController.productList.length,
+                  itemCount: dashBoardController.productList.length,
                   itemBuilder: (context, index) {
                     return CardItemHorizontal(
-                        productModel: cartController.productList[index]);
+                        productModel: dashBoardController.productList[index]);
                   },
                 ),
               ),

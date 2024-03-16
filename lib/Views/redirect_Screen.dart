@@ -14,12 +14,11 @@ class RedirectScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final authController=Get.put(AuthenticationController());
     Future.delayed(const Duration(seconds: 3),() async {
-      String? userMapString= await LocalStorage.getUser(authController.emailControllerSignUP.text.toString());
-      if(userMapString==null || userMapString.isEmpty){
+       final userMapString =await LocalStorage.getLoginStatus();
+      if(userMapString){
         Get.offAll(()=>const SignInPage(),transition: Transition.rightToLeftWithFade );
-
       }else{
-        Get.offAll(()=>const DashBoardPage(),transition: Transition.rightToLeftWithFade  );
+        Get.offAll(()=>const DashBoardPage(),transition: Transition.rightToLeftWithFade );
       }
     },);
     
