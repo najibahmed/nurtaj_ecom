@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nurtaj_ecom_home/Views/authentication/login/signIn_page.dart';
 import 'package:nurtaj_ecom_home/common/Helper%20Function/widget_function.dart';
+import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 import 'package:nurtaj_ecom_home/sevices/cache_storage/local_storage.dart';
 
 import '../cart/cart_page.dart';
@@ -22,14 +22,14 @@ class DrawerPage extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-                Get.to(UserProfilePage());
+                Get.toNamed(Routes.userProfile);
               },
               leading: const Icon(Icons.person),
               title: const Text('My Profile'),
             ),
             ListTile(
               onTap: () {
-                Get.to(CartPage());
+                Get.toNamed(Routes.cart);
               },
               leading: const Icon(Icons.shopping_cart),
               title: const Text('My Cart'),
@@ -41,7 +41,7 @@ class DrawerPage extends StatelessWidget {
             ),
             ListTile(
               onTap: () {
-                Get.to(SignInPage());
+                Get.toNamed(Routes.signIN);
               },
               leading: const Icon(Icons.person),
               title: const Text('Login/Register'),
@@ -53,7 +53,7 @@ class DrawerPage extends StatelessWidget {
                     title: 'Are you Sure to LogOut',
                     onSubmit: () {
                       LocalStorage.setLoginStatus(false);
-                      Get.offAll(SignInPage());
+                      Get.offNamed(Routes.signIN);
                     });
               },
               leading: const Icon(Icons.logout),

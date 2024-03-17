@@ -4,7 +4,6 @@ import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
 
 import 'package:nurtaj_ecom_home/custom_widgets/card_item_view.dart';
 import 'package:nurtaj_ecom_home/models/cart_model.dart';
-import 'package:pinput/pinput.dart';
 
 class CartPage extends StatefulWidget {
   static const String routeName= '/cartPage';
@@ -26,15 +25,18 @@ class _CartPageState extends State<CartPage> {
       body: Column(
           children: [
             Expanded(
-              child: Obx(()=> ListView.builder(
-                  itemCount: cartController.cartList.length,
-                  itemBuilder: (context, index) {
-                    final cartModel = cartController.cartList[index];
-                    return CartItemView( cartModel: cartModel,);
-                  },
-                ),
-              ),
-            ),
+              child:  GetBuilder(
+                init: cartController,
+                builder: (_){
+                  return ListView.builder(
+                    itemCount: cartController.cartList.length,
+                    itemBuilder: (context, index) {
+                      final cartModel = cartController.cartList[index];
+                      return CartItemView( cartModel: cartModel,);
+                    },
+                  );
+                }
+            ),),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Card(
@@ -44,7 +46,7 @@ class _CartPageState extends State<CartPage> {
                     children: [
                       Expanded(
                           child: Text(
-                            'SUB TOTAL: \$100',
+                            'SUB TOTAL: ',
                             style: Theme.of(context).textTheme.headline6,
                           )),
                       OutlinedButton(

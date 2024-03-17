@@ -6,6 +6,7 @@ import 'package:nurtaj_ecom_home/custom_widgets/custom_horizontal_list.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/homepage_slider.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/product_grid_item_view.dart';
 import 'package:nurtaj_ecom_home/custom_widgets/special_deal_container.dart';
+import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import '../../common/const/color.dart';
@@ -16,7 +17,6 @@ import '../cart/cart_page.dart';
 import '../user profile/user_profile_page.dart';
 
 class DashBoardPage extends StatefulWidget {
-  static const String routeName = '/home';
   const DashBoardPage({super.key});
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();
@@ -28,7 +28,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final dashBoardController=Get.put(DashBoardController());
+    DashBoardController dashBoardController=Get.find();
     return Scaffold(
       extendBody: true,
 
@@ -170,7 +170,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
                             children: [
                               IconButton(
                                   onPressed: () {
-                                    Get.to(const CartPage());
+                                    // Get.to(const CartPage());
+                                    Get.toNamed(Routes.cart);
                                   },
                                   icon: const Icon(
                                     Icons.shopping_cart,

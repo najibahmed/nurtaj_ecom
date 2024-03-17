@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/models/product_model.dart';
+import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 
 import '../Views/product details/product_details_page.dart';
 import '../models/product_models.dart';
@@ -14,7 +15,7 @@ class ProductGridItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>Get.to(ProductDetails(),arguments:productModel),
+      onTap: () =>Get.toNamed(Routes.productDetails, arguments:productModel),
       child: Card(
         child: Container(
           decoration: BoxDecoration(

@@ -6,7 +6,7 @@ import '../../common/Helper Function/widget_function.dart';
 
 
 class UserProfilePage extends StatefulWidget {
-  static const String routeName = '/profile';
+
 
   const UserProfilePage({Key? key}) : super(key: key);
 

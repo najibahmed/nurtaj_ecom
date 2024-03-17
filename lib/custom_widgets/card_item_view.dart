@@ -23,7 +23,9 @@ class CartItemView extends StatelessWidget {
               title: Text(cartModel.productName),
               subtitle: Text('Unit Price: \$${cartModel.salePrice}'),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  cartController.removeFromCart(cartModel.productId);
+                },
                 icon: const Icon(Icons.delete),
               ),
             ),

@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/Controller/authentication_controller.dart';
 import 'package:nurtaj_ecom_home/Views/authentication/login/signIn_page.dart';
 import 'package:nurtaj_ecom_home/Views/home/dashBoard_page.dart';
+import 'package:nurtaj_ecom_home/routes/app_pages.dart';
+import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 import '../common/const/constants.dart';
 import '../sevices/cache_storage/local_storage.dart';
 
@@ -12,13 +14,14 @@ class RedirectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authController=Get.put(AuthenticationController());
     Future.delayed(const Duration(seconds: 3),() async {
        final userMapString =await LocalStorage.getLoginStatus();
       if(userMapString){
-        Get.offAll(()=>const SignInPage(),transition: Transition.rightToLeftWithFade );
+        // Get.offAll(()=>const SignInPage(),transition: Transition.rightToLeftWithFade );
+        Get.offAllNamed(Routes.signIN);
       }else{
-        Get.offAll(()=>const DashBoardPage(),transition: Transition.rightToLeftWithFade );
+        // Get.offAll(()=>const DashBoardPage(),transition: Transition.rightToLeftWithFade );
+        Get.offAllNamed(Routes.dashBoard);
       }
     },);
     

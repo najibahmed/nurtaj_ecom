@@ -1,6 +1,7 @@
 
 
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:nurtaj_ecom_home/Views/redirect_Screen.dart';
 import 'package:nurtaj_ecom_home/Views/user%20profile/user_profile_page.dart';
 import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 
@@ -15,7 +16,7 @@ class AppPages {
 
   static final routes = [
     GetPage(
-      name: Paths.home,
+      name: Paths.dashBoard,
       page: () => const DashBoardPage(),
     ),
 GetPage(
@@ -37,6 +38,10 @@ GetPage(
 GetPage(
       name: Paths.signUp,
       page: () => const SignUpScreen(),
+    ),
+    GetPage(
+      name: Paths.redirect,
+      page: () => const RedirectScreen(),
     ),
 
   ];

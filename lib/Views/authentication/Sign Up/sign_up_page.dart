@@ -10,12 +10,11 @@ import '../../../custom_widgets/custom_form_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
-  static const String routeName = "/signUpPage";
 
   @override
   Widget build(BuildContext context) {
     ///dependency
-    final authController=Get.put(AuthenticationController());
+    AuthenticationController authController=Get.find();
     final theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(

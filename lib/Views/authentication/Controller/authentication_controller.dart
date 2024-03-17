@@ -9,6 +9,7 @@ import '../../../models/user_model.dart';
 import '../../../sevices/cache_storage/local_database.dart';
 
 class AuthenticationController extends GetxController {
+
   late UserModel userModel;
   List<UserModel> userlist = [];
 
@@ -21,6 +22,7 @@ class AuthenticationController extends GetxController {
   TextEditingController confirmPasswordController = TextEditingController();
   TextEditingController emailControllerSignIn = TextEditingController();
   TextEditingController passwordControllerSignIn = TextEditingController();
+
 
   Future<bool> signIn(BuildContext context) async {
     EasyLoading.show(status: 'Wait..');
@@ -74,11 +76,25 @@ class AuthenticationController extends GetxController {
 
   void getAllUser() async {
     userlist = await DbHelper.getAllUser();
+    update();
   }
 
   Future<int> insertUser(UserModel userModel) => DbHelper.insertUser(userModel);
 
   Future<void> getUserById(int id) async {
     userModel = await DbHelper.getUserById(id);
+  }
+
+
+  @override
+  void onClose() {
+    // TODO: implement onClose
+    nameController.clear();
+    emailControllerSignUP.clear();
+    passwordControllerSignUp.clear();
+    confirmPasswordController.clear();
+    emailControllerSignIn.clear();
+    passwordControllerSignIn.clear();
+    super.onClose();
   }
 }

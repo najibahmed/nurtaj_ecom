@@ -11,12 +11,12 @@ import '../Controller/authentication_controller.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
-  static const String routeName = "/signInPage";
+
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final authController = Get.put(AuthenticationController());
+    AuthenticationController authController = Get.find();
     return Scaffold(
       appBar: AppBar(
         title: Text(

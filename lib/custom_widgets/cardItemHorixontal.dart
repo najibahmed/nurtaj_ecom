@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:nurtaj_ecom_home/routes/app_routes.dart';
 import '../Views/product details/product_details_page.dart';
 import '../common/const/color.dart';
 import '../common/const/constants.dart';
@@ -16,7 +17,7 @@ class CardItemHorizontal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () => Get.to(()=>ProductDetails(),arguments:productModel),
+        onTap: () => Get.toNamed(Routes.productDetails,arguments:productModel),
         child: Card(
           elevation: 8,
           child: Stack(

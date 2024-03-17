@@ -12,7 +12,7 @@ class SpecialDealContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dashBoardController = Get.put(DashBoardController());
+    DashBoardController dashBoardController = Get.find();
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 12),
       child: Container(

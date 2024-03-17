@@ -11,26 +11,28 @@ import '../../common/Helper Function/helper_function.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
-  static const String routeName = "/productDetails";
   @override
-  State<ProductDetails> createState() => _MovieInfoState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
-class _MovieInfoState extends State<ProductDetails> {
-  // late ProductModels productModels;
-
-
+class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
-    final detailsController=Get.put(ProductDetailsController());
-    final cartController=Get.put(CartController());
-    final productModels=Get.arguments ;
+    ProductDetailsController detailsController =
+        Get.put(ProductDetailsController());
+    final cartController = Get.put(CartController(), permanent: true);
+    ProductModels productModel = Get.arguments;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             backgroundColor: Colors.white,
-            title: Text(productModels.productName),
+            title: Text(productModel.productName),
+            leading: IconButton(
+                onPressed: (){
+                  Get.back();
+                },
+                icon: Icon(Icons.arrow_back_ios)),
             bottom: PreferredSize(
                 preferredSize: const Size.fromHeight(100),
                 child: Padding(
@@ -38,11 +40,11 @@ class _MovieInfoState extends State<ProductDetails> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      extraImageShow(productModels.additionalImages[0]),
+                      extraImageShow(productModel.additionalImages[0]),
                       const SizedBox(width: 10),
-                      extraImageShow(productModels.additionalImages[1]),
+                      extraImageShow(productModel.additionalImages[1]),
                       const SizedBox(width: 10),
-                      extraImageShow(productModels.additionalImages[2]),
+                      extraImageShow(productModel.additionalImages[2]),
                     ],
                   ),
                 )),
@@ -50,21 +52,20 @@ class _MovieInfoState extends State<ProductDetails> {
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Hero(
-                tag: productModels.productName,
+                tag: productModel.productName,
                 child: ClipRRect(
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(40),
                       bottomRight: Radius.circular(40),
                     ),
                     child: Image.asset(
-                      productModels.thumbnailImageUrl,
+                      productModel.thumbnailImageUrl,
                       fit: BoxFit.cover,
                     )),
               ),
             ),
           ),
           SliverList(
-
             delegate: SliverChildListDelegate([
               Container(
                 padding: EdgeInsets.all(15),
@@ -85,8 +86,9 @@ class _MovieInfoState extends State<ProductDetails> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        productModels.productName,
-                        style: const TextStyle(fontSize: 20,color: Colors.white),
+                        productModel.productName,
+                        style:
+                            const TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                     //
@@ -98,10 +100,11 @@ class _MovieInfoState extends State<ProductDetails> {
                 child: Row(
                   children: [
                     Expanded(
-                      child: Obx((){
+                      child: Obx(() {
                         return OutlinedButton.icon(
                           onPressed: () {
-                            detailsController.isfavourite.value = detailsController.isfavourite.isFalse;
+                            detailsController.isfavourite.value =
+                                detailsController.isfavourite.isFalse;
                           },
                           icon: Icon(detailsController.isfavourite.isTrue
                               ? Icons.favorite
@@ -110,31 +113,33 @@ class _MovieInfoState extends State<ProductDetails> {
                               ? 'Remove From Favourite'
                               : 'ADD TO FAVORITE'),
                         );
-                      }
-                      ),
+                      }),
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     Expanded(
-                      child: Obx((){
-                        final isInCart= cartController.isProductInCart(productModels.productId!);
-                        return OutlinedButton.icon(
-                          onPressed: () {
-                           if(isInCart){
-                             cartController.removeFromCart(productModels.productId!);
-                           }else{
-                             cartController.addToCart(productModels);
-                           }
-                            // detailsController.inCart.value = detailsController.inCart.isFalse;
-                          },
-                          icon: Icon(isInCart
-                              ? Icons.remove_shopping_cart
-                              : Icons.add_shopping_cart),
-                          label:
-                          Text(isInCart ? 'Remove From Cart' : 'ADD TO Cart'),
-                        );
-                      },
+                      child: Obx(
+                        () {
+                          bool isInCart = Get.find<CartController>()
+                              .isProductInCart(productModel.productId!);
+                          return OutlinedButton.icon(
+                            onPressed: () {
+                              if (isInCart) {
+                                cartController
+                                    .removeFromCart(productModel.productId!);
+                              } else {
+                                cartController.addToCart(productModel);
+                              }
+                              // detailsController.inCart.value = detailsController.inCart.isFalse;
+                            },
+                            icon: Icon(isInCart
+                                ? Icons.remove_shopping_cart
+                                : Icons.add_shopping_cart),
+                            label: Text(
+                                isInCart ? 'Remove From Cart' : 'ADD TO Cart'),
+                          );
+                        },
                       ),
                     )
                   ],
@@ -156,7 +161,8 @@ class _MovieInfoState extends State<ProductDetails> {
                             allowHalfRating: true,
                             ignoreGestures: false,
                             itemCount: 5,
-                            itemPadding: const EdgeInsets.symmetric(horizontal: 0.0),
+                            itemPadding:
+                                const EdgeInsets.symmetric(horizontal: 0.0),
                             itemBuilder: (context, _) => Icon(
                               Icons.star,
                               color: Colors.amber,
@@ -172,7 +178,8 @@ class _MovieInfoState extends State<ProductDetails> {
                           EasyLoading.show(status: 'Please wait');
                           Future.delayed(Duration(seconds: 3), () {
                             EasyLoading.dismiss();
-                            showMsg(context, 'Please sign in to rate this product');
+                            showMsg(
+                                context, 'Please sign in to rate this product');
                           });
                           showMsg(context, 'Thanks for your rating');
                         },
@@ -182,7 +189,6 @@ class _MovieInfoState extends State<ProductDetails> {
                   ),
                 ),
               ),
-
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(8),
@@ -201,7 +207,8 @@ class _MovieInfoState extends State<ProductDetails> {
                       ),
                       OutlinedButton(
                         onPressed: () async {
-                          if (detailsController.commentController.text.isEmpty) {
+                          if (detailsController
+                              .commentController.text.isEmpty) {
                             showMsg(context, 'Please provide a comment');
                             return;
                           }
