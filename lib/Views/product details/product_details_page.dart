@@ -29,7 +29,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             backgroundColor: Colors.white,
             title: Text(productModel.productName),
             leading: IconButton(
-                onPressed: (){
+                onPressed: () {
                   Get.back();
                 },
                 icon: Icon(Icons.arrow_back_ios)),
@@ -119,29 +119,25 @@ class _ProductDetailsState extends State<ProductDetails> {
                       width: 10,
                     ),
                     Expanded(
-                      child: Obx(
-                        () {
-                          bool isInCart = Get.find<CartController>()
-                              .isProductInCart(productModel.productId!);
-                          return OutlinedButton.icon(
-                            onPressed: () {
-                              if (isInCart) {
-                                cartController
-                                    .removeFromCart(productModel.productId!);
-                              } else {
-                                cartController.addToCart(productModel);
-                              }
-                              // detailsController.inCart.value = detailsController.inCart.isFalse;
-                            },
-                            icon: Icon(isInCart
-                                ? Icons.remove_shopping_cart
-                                : Icons.add_shopping_cart),
-                            label: Text(
-                                isInCart ? 'Remove From Cart' : 'ADD TO Cart'),
-                          );
+                        child: GetX<CartController>(builder: (controller) {
+                          bool isInCart =
+                          cartController.isProductInCart(productModel.productId!);
+                      return OutlinedButton.icon(
+                        onPressed: () {
+                          if (isInCart) {
+                            controller.removeFromCart(productModel.productId!);
+                          } else {
+                            controller.addToCart(productModel);
+                          }
+                          // detailsController.inCart.value = detailsController.inCart.isFalse;
                         },
-                      ),
-                    )
+                        icon: Icon(isInCart
+                            ? Icons.remove_shopping_cart
+                            : Icons.add_shopping_cart),
+                        label:
+                            Text(isInCart ? 'Remove From Cart' : 'ADD TO Cart'),
+                      );
+                    }))
                   ],
                 ),
               ),

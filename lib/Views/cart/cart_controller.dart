@@ -7,7 +7,7 @@ import '../../models/cart_model.dart';
 
 class CartController extends GetxController {
 
-  List<CartModel> cartList=<CartModel>[].obs;
+  RxList<CartModel> cartList=<CartModel>[].obs;
 
   bool isProductInCart(String pid) {
     RxBool tag = false.obs;
@@ -32,7 +32,8 @@ class CartController extends GetxController {
   
   void removeFromCart(String s) {
     print('remove');
-    return  cartList.removeWhere((element) => element.productId =='s');
+    var temp=  cartList.where((element) => element.productId !=s).toList();
+    cartList.value=temp;
   }
 
   void increaseQuantity(CartModel cartModel) {

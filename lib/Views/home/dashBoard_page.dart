@@ -29,6 +29,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   @override
   Widget build(BuildContext context) {
     DashBoardController dashBoardController=Get.find();
+    final cartController=Get.put(CartController());
     return Scaffold(
       extendBody: true,
 
