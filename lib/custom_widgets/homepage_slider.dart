@@ -30,7 +30,7 @@ class SliderBanner extends StatelessWidget {
                   child: Image.asset(
                     height:180 ,
                     item.image,
-                    fit: BoxFit.cover,
+                    fit: BoxFit.fill,
 
                   )),
             ),

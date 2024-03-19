@@ -14,14 +14,14 @@ class RedirectScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Future.delayed(const Duration(seconds: 3),() async {
+    Future.delayed(const Duration(seconds: 5),() async {
        final userMapString =await LocalStorage.getLoginStatus();
       if(userMapString){
         // Get.offAll(()=>const SignInPage(),transition: Transition.rightToLeftWithFade );
-        Get.offAllNamed(Routes.signIN);
+        Get.offAllNamed(Routes.signIN,);
       }else{
         // Get.offAll(()=>const DashBoardPage(),transition: Transition.rightToLeftWithFade );
-        Get.offAllNamed(Routes.dashBoard);
+        Get.offAllNamed(Routes.dashBoard,);
       }
     },);
     

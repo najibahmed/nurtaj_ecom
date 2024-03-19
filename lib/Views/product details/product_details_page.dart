@@ -8,6 +8,7 @@ import 'package:nurtaj_ecom_home/Views/cart/cart_controller.dart';
 import 'package:nurtaj_ecom_home/Views/product%20details/controller/product_details_controller.dart';
 import 'package:nurtaj_ecom_home/models/product_models.dart';
 import '../../common/Helper Function/helper_function.dart';
+import '../../common/tools/dialog.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({super.key});
@@ -118,16 +119,18 @@ class _ProductDetailsState extends State<ProductDetails> {
                     SizedBox(
                       width: 10,
                     ),
-                    Expanded(
-                        child: GetX<CartController>(builder: (controller) {
-                          bool isInCart =
-                          cartController.isProductInCart(productModel.productId!);
+                    Expanded(child: GetX<CartController>(builder: (controller) {
+                      bool isInCart = cartController
+                          .isProductInCart(productModel.productId!);
                       return OutlinedButton.icon(
                         onPressed: () {
                           if (isInCart) {
                             controller.removeFromCart(productModel.productId!);
+                            showMsg(context, "Product has removed from the Cart");
                           } else {
                             controller.addToCart(productModel);
+                            showSuccessDialogInTop(
+                                "Successful", "Product is Added to Car", context);
                           }
                           // detailsController.inCart.value = detailsController.inCart.isFalse;
                         },

@@ -11,6 +11,7 @@ import 'package:stylish_bottom_bar/model/bar_items.dart';
 import 'package:stylish_bottom_bar/stylish_bottom_bar.dart';
 import '../../common/const/color.dart';
 import '../../common/const/constants.dart';
+import '../../custom_widgets/cart bubble_view.dart';
 import '../Drawer/custom_dawer.dart';
 import '../../custom_widgets/custom_tab_view.dart';
 import '../cart/cart_page.dart';
@@ -163,24 +164,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                       ),
                       /// Action Buttons
                       actions: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              IconButton(
-                                  onPressed: () {
-                                    // Get.to(const CartPage());
-                                    Get.toNamed(Routes.cart);
-                                  },
-                                  icon: const Icon(
-                                    Icons.shopping_cart,
-                                    color: MyColors.myBlue,
-                                  )),
-                            ],
-                          ),
-                        ),
+                        const CartBubbleView()
                       ],
                       pinned: true,
                       // elevation: 10,
@@ -244,7 +228,11 @@ class _DashBoardPageState extends State<DashBoardPage> {
                         childAspectRatio: 1,
                       ))
                 ]),
-            const Center(child: Text('Star')),
+             Center(child: Container(
+               width: double.infinity,
+                height: double.infinity,
+                color: Colors.teal,
+                child: Text('Star'))),
             const CartPage(),
             const UserProfilePage()
           ],

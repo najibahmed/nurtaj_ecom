@@ -84,8 +84,8 @@ class _CustomTabViewState extends State<CustomTabView> {
                   ),
                   child: TabBarView(
                     children: <Widget>[
-                      tabBarGridItems(),
-                      tabBarGridItems(),
+                      TabBarGridItems(),
+                      TabBarGridItems(),
                       Center(
                         child: Icon(Icons.directions_car),
                       ),

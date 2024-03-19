@@ -104,15 +104,15 @@ class CardItemHorizontal extends StatelessWidget {
                 ),
               ),
               Positioned(
-                  top: 0,
-                  right: 0,
+                  top: 5,
+                  right: 1,
                   child: Container(
-                    color: Colors.black.withOpacity(.10),
+                    color: MyColors.myBlue.withOpacity(.50),
                     height: 20,
                     width: 80,
                     child: Text(
                       ' 20% OFF',
-                      style: TextStyle(color: Colors.black54),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ))
             ],

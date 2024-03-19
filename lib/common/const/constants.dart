@@ -13,6 +13,6 @@ final  categoryList = [
   "Shampoo",
 ];
 
-final currency_logo='৳';
+const currency_logo='৳';
 final endTimeDuration=DateTime.now().millisecondsSinceEpoch + 12 * 3600000;
 const String appSplashUrl="assets/Nurtaj_Splash.jpeg";

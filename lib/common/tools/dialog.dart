@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:motion_toast/motion_toast.dart';
+import 'package:nurtaj_ecom_home/common/const/color.dart';
 
 
 
@@ -70,8 +71,8 @@ showSuccessDialogInTop(String title, String message, BuildContext context) {
 
       borderRadius: 10,
       width: Get.width,
-      shadowColor: Colors.green.shade100,
-      backgroundColor: Colors.green.shade100,
+      shadowColor: MyColors.myBlue.withOpacity(.20),
+      backgroundColor: MyColors.myBlue.withOpacity(.50),
       animationDuration: const Duration(milliseconds: 400),
       toastDuration:const Duration(seconds: 2) ,
       toastPosition:TOAST.Position.top ,

@@ -65,4 +65,5 @@ class DashBoardController extends GetxController{
           "assets/wallet.png","assets/wallet.png","assets/wallet.png"
         ]),
   ];
+
 }
